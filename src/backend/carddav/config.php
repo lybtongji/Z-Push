@@ -28,13 +28,13 @@
 // ************************
 
 // Server protocol: http or https
-define('CARDDAV_PROTOCOL', 'https');
+define('CARDDAV_PROTOCOL', 'http');
 
 // Server name
-define('CARDDAV_SERVER', 'localhost');
+define('CARDDAV_SERVER', '127.0.0.1');
 
 // Server port
-define('CARDDAV_PORT', '443');
+define('CARDDAV_PORT', '5232');
 
 // Server path to the addressbook, or the principal with the addressbooks
 //  If your user has more than 1 addressbook point it to the principal.
@@ -46,7 +46,7 @@ define('CARDDAV_PORT', '443');
 // %u: replaced with the username
 // %d: replaced with the domain
 //   Add the trailing /
-define('CARDDAV_PATH', '/caldav.php/%u/');
+define('CARDDAV_PATH', '/%u/');
 
 
 // Server path to the default addressbook
@@ -55,7 +55,7 @@ define('CARDDAV_PATH', '/caldav.php/%u/');
 // %u: replaced with the username
 // %d: replaced with the domain
 //   Add the trailing /
-define('CARDDAV_DEFAULT_PATH', '/caldav.php/%u/addresses/');
+define('CARDDAV_DEFAULT_PATH', '/%u/contacts/');
 
 // Server path to the GAL addressbook. This addressbook is readonly and searchable by the user, but it will NOT be synced.
 // If you don't want GAL, comment it
@@ -63,7 +63,7 @@ define('CARDDAV_DEFAULT_PATH', '/caldav.php/%u/addresses/');
 // %u: replaced with the username
 // %d: replaced with the domain
 //  Add the trailing /
-define('CARDDAV_GAL_PATH', '/caldav.php/%d/GAL/');
+//define('CARDDAV_GAL_PATH', '/caldav.php/%d/GAL/');
 
 // Minimal length for the search pattern to do the real search.
 define('CARDDAV_GAL_MIN_LENGTH', 5);
@@ -79,7 +79,7 @@ define('CARDDAV_CONTACTS_FOLDER_NAME', '%u Addressbook');
 // DAViCal and SabreDav support it, but Owncloud, SOGo don't
 // SabreDav version must be at least 1.9.0, otherwise set this to false
 // Setting this to false will work with most servers, but it will be slower: 1 petition for the href of vcards, and 1 petition for each vcard
-define('CARDDAV_SUPPORTS_SYNC', false);
+define('CARDDAV_SUPPORTS_SYNC', true);
 
 
 // If the CardDAV server supports the FN attribute for searches
