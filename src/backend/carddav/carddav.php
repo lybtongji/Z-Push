@@ -1265,6 +1265,18 @@ class BackendCardDAV extends BackendDiff implements ISearchProvider {
             'nickname' => 'NICKNAME'
         );
 
+        if (empty($message->fileas)) {
+            $parts = array();
+
+            if (!empty($message->title)) $parts[] = $message->title;
+            if (!empty($message->firstname)) $parts[] = $message->firstname;
+            if (!empty($message->middlename)) $parts[] = $message->middlename;
+            if (!empty($message->lastname)) $parts[] = $message->lastname;
+            if (!empty($message->suffix)) $parts[] = $message->suffix;
+
+            if (!empty($parts)) $message->fileas = implode(' ', $parts);
+        }
+
         $data = "BEGIN:VCARD\nVERSION:3.0\nPRODID:Z-Push\n";
         foreach ($mapping as $k => $v) {
             $val = '';
