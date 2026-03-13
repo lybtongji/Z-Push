@@ -476,6 +476,7 @@ EOFXMLINITIALSYNC;
                 }
             }
             else {
+                ZLog::Write(LOGLEVEL_DEBUG, "P5");
                 throw $ex;
             }
         }
@@ -714,6 +715,7 @@ EOFXMLGETXMLVCARD;
                     }
                 }
                 else {
+                    ZLog::Write(LOGLEVEL_DEBUG, "each response: " . print_r($response, true));
                     // We don't have a propstat node, so it will be an error answer
                     if (isset($response->status) && preg_match('/404 Not Found/', $response->status)) {
                         throw new Exception('Not found!', self::EXCEPTION_COULD_NOT_FIND_VCARD_HREF);
