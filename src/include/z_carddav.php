@@ -439,17 +439,20 @@ EOFXMLINITIALSYNC;
      * @return string
      */
     private function do_query_report($xml, $include_vcards = true, $raw = false, $remove_duplicates = false) {
-//         ZLog::Write(LOGLEVEL_DEBUG, sprintf("BackendCardDAV->carddav_backend->do_query_report"));
+        ZLog::Write(LOGLEVEL_DEBUG, sprintf("BackendCardDAV->carddav_backend->do_query_report"));
         $result = $this->query($this->url, 'REPORT', $xml, 'text/xml');
+        ZLog::Write(LOGLEVEL_DEBUG, "REPORT result: " . print_r($result, true));
 
         try {
             switch ($result['http_code']) {
                 case 200:
                 case 207:
                     if ($raw === true) {
+                        ZLog::Write(LOGLEVEL_DEBUG, "P1");
                         return $result['response'];
                     }
                     else {
+                        ZLog::Write(LOGLEVEL_DEBUG, "P2");
                         return $this->simplify($result['response'], $include_vcards, $remove_duplicates);
                     }
                 break;
@@ -463,9 +466,11 @@ EOFXMLINITIALSYNC;
             // vcard not found
             if ($ex->getCode() == self::EXCEPTION_COULD_NOT_FIND_VCARD_HREF) {
                 if (strlen($this->url_vcard_extension) == 0 || stripos($xml, $this->url_vcard_extension) === FALSE) {
+                    ZLog::Write(LOGLEVEL_DEBUG, "P3");
                     throw $ex;
                 }
                 else {
+                    ZLog::Write(LOGLEVEL_DEBUG, "P4");
                     // try to do the same without the $this->url_vcard_extension
                     return $this->do_query_report(str_ireplace($this->url_vcard_extension, "", $xml), $include_vcards, $raw, $remove_duplicates);
                 }
