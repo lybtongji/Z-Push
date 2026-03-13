@@ -33,11 +33,11 @@ if (!defined("ZPUSH_VERSION")) {
         define("ZPUSH_VERSION", $branch .'-'. $version);
     }
     elseif (file_exists($file)) {
-        $line = fgets(fopen($file, 'r'));
+        $line = trim(fgets(fopen($file, 'r')));
         define("ZPUSH_VERSION", $line);
     }
     elseif (file_exists($fileparent)) {
-        $line = fgets(fopen($fileparent, 'r'));
+        $line = trim(fgets(fopen($fileparent, 'r')));
         define("ZPUSH_VERSION", $line);
     }
     else {
